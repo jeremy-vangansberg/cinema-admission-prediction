@@ -7,6 +7,12 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 import re
+import pyodbc
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path='/home/jeremy/Documents/projects/cinema-admission-prediction/data_collection/.env')
+
 
 
 
@@ -50,10 +56,76 @@ class BoxOfficePipeline:
                 value = adapter.get(field_name)
                 if value is not None :
                     adapter[field_name] = value.strip()
-                print('***cleaning done***')
 
         # Removing white spaces
         entries = adapter.get('entries')
-        adapter['entries'] = entries.replace(" ", "")
+        adapter['entries'] = int(entries.replace(" ", ""))
         
         return item
+
+class SaveAzureSQLPipeline:
+
+    def __init__(self) -> None:
+        try:
+            self.server = os.getenv('DB_HOST')
+            self.database = os.getenv('DB_NAME')
+            self.username = os.getenv('DB_USER')
+            self.password = os.getenv('DB_PASSWORD')
+
+            self.cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+self.server+';DATABASE='+self.database+';ENCRYPT=yes;UID='+self.username+';PWD='+ self.password)
+            self.cursor = self.cnxn.cursor()
+
+            self.cursor.execute("""
+            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='boxoffice' and xtype='U')
+            BEGIN
+                CREATE TABLE boxoffice(
+                    id INT NOT NULL IDENTITY(1,1),
+                    title VARCHAR(255),
+                    original_title VARCHAR(255),
+                    entries INTEGER,
+                    director VARCHAR(255),
+                    release_date DATE,
+                    duration INTEGER,
+                    PRIMARY KEY (id)
+                    )
+                END
+            """)
+            self.cnxn.commit()
+
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+
+    def process_item(self, item, spider):
+        try:
+            ## Define insert statement
+            self.cursor.execute(""" INSERT INTO boxoffice (
+                title, 
+                original_title, 
+                entries, 
+                director,
+                release_date,
+                duration
+                ) values (?, ?, ?, ?, ?, ?)""", (
+                item["title"],
+                item["original_title"],
+                item["entries"],
+                item["director"],
+                item["release_date"],
+                item["duration"]
+            ))
+
+            ## Execute insert of data into database
+            self.cnxn.commit()
+
+        except Exception as e:
+            print(f"An error occurred when inserting data: {str(e)}")
+        return item
+
+    def close_spider(self, spider):
+        try:
+            ## Close cursor & connection to database 
+            self.cursor.close()
+            self.cnxn.close()
+
+        except Exception as e:
+            print(f"An error occurred when closing the connection: {str(e)}")

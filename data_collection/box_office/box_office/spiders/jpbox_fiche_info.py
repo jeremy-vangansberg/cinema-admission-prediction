@@ -2,7 +2,7 @@ import scrapy
 from box_office.items import BoxOfficeItem
 
 class JpboxSpider(scrapy.Spider):
-    name = 'jpbox2'
+    name = 'spider_jpbox'
     allowed_domains = ['jpbox-office.com']
     start_urls = ['https://jpbox-office.com/v9_demarrage.php?view=2&filtre=classg&limite=0&infla=0&variable=0&tri=champ0&order=DESC&limit5=0/']
 
@@ -18,7 +18,7 @@ class JpboxSpider(scrapy.Spider):
 
         limit = response.meta['limit'] + 30
 
-        if limit < 600 :
+        if limit < 9330 :
             next_page_url = f'https://jpbox-office.com/v9_demarrage.php?view=2&filtre=classg&limite={limit}&infla=0&variable=0&tri=champ0&order=DESC&limit5=0'
             yield scrapy.Request(url=next_page_url, callback=self.parse, meta={'limit': limit})
 

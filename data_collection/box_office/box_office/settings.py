@@ -75,6 +75,7 @@ SCRAPEOPS_NUM_RESULTS = 5
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'box_office.pipelines.BoxOfficePipeline': 300,
+   'box_office.pipelines.SaveAzureSQLPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
