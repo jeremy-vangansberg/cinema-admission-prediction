@@ -10,6 +10,7 @@ import re
 import pyodbc
 from dotenv import load_dotenv
 import os
+from datetime import datetime
 
 load_dotenv(dotenv_path='/home/jeremy/Documents/projects/cinema-admission-prediction/data_collection/.env')
 
@@ -60,6 +61,11 @@ class BoxOfficePipeline:
         # Removing white spaces
         entries = adapter.get('entries')
         adapter['entries'] = int(entries.replace(" ", ""))
+
+        # convert to date
+        date = adapter.get('release_date')
+        date_format = '%d/%m/%Y'
+        adapter['release_date'] = datetime.strptime(date, date_format)
         
         return item
 
