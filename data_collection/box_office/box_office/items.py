@@ -7,7 +7,9 @@ import scrapy
 
 
 class BoxOfficeItem(scrapy.Item):
-    # define the fields for your item here like:
-    name = scrapy.Field()
+    title = scrapy.Field()
+    original_title = scrapy.Field()
     entries = scrapy.Field()
-    pass
+    director = scrapy.Field()
+    release_date = scrapy.Field()
+    duration = scrapy.Field()
