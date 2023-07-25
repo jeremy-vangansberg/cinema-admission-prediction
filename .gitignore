@@ -1,6 +1,7 @@
-# Model
-model/azure_experiment.ipynb
 
+*.csv
+secrets/
+model/azure_experiment.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
