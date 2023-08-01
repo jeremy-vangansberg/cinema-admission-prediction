@@ -13,3 +13,18 @@ class BoxOfficeItem(scrapy.Item):
     director = scrapy.Field()
     release_date = scrapy.Field()
     duration = scrapy.Field()
+
+
+class FeaturesItem(scrapy.Item):
+    title = scrapy.Field()
+    director = scrapy.Field()
+    actors = scrapy.Field()
+    id_film = scrapy.Field()
+    synopsis = scrapy.Field()
+    release_date = scrapy.Field()
+    duration = scrapy.Field()
+    genre = scrapy.Field()
+    language = scrapy.Field()
+    country = scrapy.Field()
+    original_title = scrapy.Field()
+    distrib = scrapy.Field()

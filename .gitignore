@@ -1,7 +1,7 @@
+deploy_airflow.sh 
 
 # Model
 model/azure_experiment.ipynb
-
 
 # data_collection
 data_collection/TMDB_API/api_pipeline.py
