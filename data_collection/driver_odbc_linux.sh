@@ -6,4 +6,4 @@ echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/21.10/prod impish m
 
 sudo apt update
 
-sudo apt install msodbcsql18
+sudo ACCEPT_EULA=Y apt install msodbcsql18
