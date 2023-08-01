@@ -18,7 +18,7 @@ dag = DAG(
     'my_spider_dag',
     default_args=default_args,
     description='A DAG to run a spider every Monday at 8 o\'clock',
-    schedule_interval='*/2 * * * *',  # Cron expression for every Monday at 8:00
+    schedule_interval='0 8 * * 1',  # Cron expression for every Monday at 8:00
     catchup=False,
 )
 
