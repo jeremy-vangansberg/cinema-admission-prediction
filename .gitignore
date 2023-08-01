@@ -1,4 +1,4 @@
-
+deploy_airflow.sh 
 *.csv
 secrets/
 model/azure_experiment.ipynb
