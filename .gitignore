@@ -1,7 +1,19 @@
 deploy_airflow.sh 
+
+# Model
+model/azure_experiment.ipynb
+
+# data_collection
+data_collection/TMDB_API/api_pipeline.py
+data_collection/TMDB_API/api_request_pipeline.py
+data_collection/TMDB_API/request_api.py
+data_collection/TMDB_API/request_api.ipynb
+
+#Other
 *.csv
 secrets/
-model/azure_experiment.ipynb
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
