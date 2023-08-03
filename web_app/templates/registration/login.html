@@ -103,9 +103,9 @@
                             {% endif %}
                         {% endif %}
                 
-                        <img class="mb-4 justify-content-center" src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+                        <img class="mb-4 justify-content-center" src="{% static 'images/popcorn_logo.png' %}" alt="" width="272" height="257">
                         <div class='container-sm'>
-                          
+
                         <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
@@ -125,7 +125,7 @@
                             </label>
                             </div>
                 
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                        <button class="w-100 btn btn-lg btn-danger" type="submit">Sign in</button>
                 
                         <input type="hidden" name="next" value="{{ next }}">
                         </form>

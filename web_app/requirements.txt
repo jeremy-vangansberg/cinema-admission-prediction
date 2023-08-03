@@ -1,3 +1,4 @@
-django==4.2.3
-django-dotenv
-django-widget-tweaks
+Django==4.2.3
+django-dotenv==1.4.2
+django-widget-tweaks==1.4.12
+whitenoise==6.5.0
