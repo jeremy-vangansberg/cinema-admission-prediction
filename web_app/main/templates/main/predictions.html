@@ -3,7 +3,14 @@
 {% block content %}
 
     <div class="container">
-        This is the estimation page
+       Estimation pour les jours à venir :
+            <ul>
+
+                {% for result, response in zipped_data %}
+                   <li>{{result.1}} : {{response.prediction.0}}</li>
+                {% endfor %}
+        
+                 </ul>
 
     </div>
 
