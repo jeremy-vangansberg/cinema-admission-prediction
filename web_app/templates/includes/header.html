@@ -1,0 +1,20 @@
+{% load static %}
+
+{% url 'predictions' as url_predictions %}
+{% url 'historique' as url_hist %}
+{% url 'monitoring' as url_monitoring %}
+
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <img class="mb-4 justify-content-center" src="{% static 'images/popcorn_logo.png' %}" alt="" width="72" height="57">
+        <span class="fs-4">Cinema Pred</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{{url_predictions}}" class="nav-link {% if request.path == url_predictions %} active {% endif %}" aria-current="page">Predictions</a></li>
+        <li class="nav-item"><a href="{{url_hist}}" class="nav-link {% if request.path == url_hist %} active {% endif %}">Historique</a></li>
+        <li class="nav-item"><a href="{{url_monitoring}}" class="nav-link {% if request.path == url_monitoring %} active {% endif %}">Monitoring</a></li>
+      </ul>
+    </header>
+  </div>
